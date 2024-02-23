@@ -94,6 +94,20 @@ class MainActivity : AppCompatActivity(),OnClickListener {
             layoutManager = linearLayoutManager
             adapter = userAdapter
         }
+        val swipeHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                userAdapter.remove(viewHolder.adapterPosition)
+            }
+        })
+        swipeHelper.attachToRecyclerView(binding.recyclerView)
     }
 
     private fun getUsers():MutableList<User>{

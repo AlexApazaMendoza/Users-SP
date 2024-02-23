@@ -11,7 +11,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.userssp.databinding.ItemUserAltBinding
 import com.example.userssp.databinding.ItemUserBinding
 
-class UserAdapter(private val users: List<User>, private val listener: OnClickListener) :
+class UserAdapter(private val users: MutableList<User>, private val listener: OnClickListener) :
     RecyclerView.Adapter<UserAdapter.ViewHolder>() {
 
     private lateinit var context : Context
@@ -49,6 +49,11 @@ class UserAdapter(private val users: List<User>, private val listener: OnClickLi
 
     override fun getItemCount(): Int {
         return users.size
+    }
+
+    fun remove(position: Int) {
+        users.removeAt(position)
+        notifyItemRemoved(position)
     }
 
 }
